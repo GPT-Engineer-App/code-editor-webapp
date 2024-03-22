@@ -103,13 +103,13 @@ const Index = () => {
               </Flex>
               <Box p={2}>
                 <Flex>
-                  <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2}>
+                  <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2} lineHeight="1.5">
                     {(editedFiles[selectedFile] || mockFiles[selectedFile]).split("\n").map((_, index) => (
                       <Text key={index}>{index + 1}</Text>
                     ))}
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
-                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} fontFamily="'Fira Code', monospace" />
+                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} fontFamily="'Fira Code', monospace" lineHeight="1.5" />
                   </Box>
                 </Flex>
               </Box>
