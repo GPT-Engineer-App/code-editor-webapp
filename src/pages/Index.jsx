@@ -80,9 +80,20 @@ const Index = () => {
                 <Heading size="md">index.html</Heading>
                 <CloseButton onClick={() => setIsFileOpen(false)} />
               </Flex>
-              <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")}>
-                {mockCode}
-              </Box>
+              <Flex>
+                <Box as="pre" bg={useColorModeValue("gray.200", "gray.600")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")} width="40px" textAlign="right" mr={2}>
+                  {mockCode.split("\n").map((_, index) => (
+                    <Text key={index}>{index + 1}</Text>
+                  ))}
+                </Box>
+                <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1}>
+                  {mockCode.split("\n").map((line, index) => (
+                    <Text key={index} color={line.includes("<") ? "blue.500" : line.includes("<!DOCTYPE") ? "green.500" : line.includes("<title>") ? "purple.500" : line.includes("<script") ? "red.500" : "white"}>
+                      {line}
+                    </Text>
+                  ))}
+                </Box>
+              </Flex>
             </Box>
           )}
         </Box>
