@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import mockFiles from "../mockFiles";
+import initialMockFiles from "../mockFiles";
 import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const [mockFiles, setMockFiles] = useState(initialMockFiles);
   const [selectedFile, setSelectedFile] = useState("index.html");
   const [editedFiles, setEditedFiles] = useState({});
 
@@ -16,7 +17,10 @@ const Index = () => {
   };
 
   const handleSaveFile = () => {
-    mockFiles[selectedFile] = editedFiles[selectedFile];
+    setMockFiles((prevMockFiles) => ({
+      ...prevMockFiles,
+      [selectedFile]: editedFiles[selectedFile],
+    }));
     setEditedFiles((prevState) => {
       const { [selectedFile]: _, ...rest } = prevState;
       return rest;
@@ -111,7 +115,7 @@ const Index = () => {
                   <Box p={4} borderRadius="md" flex={1}>
                     <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} />
                   </Box>
-                  <Button onClick={handleSaveFile} mt={2}>
+                  <Button onClick={handleSaveFile} mt={2} colorScheme="green" variant="solid">
                     Save
                   </Button>
                 </Flex>
