@@ -65,7 +65,7 @@ const Index = () => {
             <Icon as={FaPuzzlePiece} color={iconColor} boxSize={6} filter="drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))" />
           </Tooltip>
         </VStack>
-        <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch" flex={1}>
+        <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch">
           <Heading size="md">Explorer</Heading>
           <Divider />
           <Text>📁 my-app</Text>
