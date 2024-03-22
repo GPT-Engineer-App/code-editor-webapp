@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import mockFiles from "../mockFiles";
-import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Code } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
 const Index = () => {
@@ -81,9 +81,75 @@ const Index = () => {
               <Heading size="md" mb={4}>
                 {selectedFile}
               </Heading>
-              <Code p={4} borderRadius="md">
-                {mockFiles[selectedFile]}
-              </Code>
+              <Flex>
+                <Box as="pre" bg={useColorModeValue("gray.200", "gray.600")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")} width="40px" textAlign="right" mr={2}>
+                  {mockFiles[selectedFile].split("\n").map((_, index) => (
+                    <Text key={index}>{index + 1}</Text>
+                  ))}
+                </Box>
+                <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1}>
+                  {mockFiles[selectedFile].split("\n").map((line, index) => {
+                    let color = "white";
+                    let fontStyle = "normal";
+                    let fontWeight = "normal";
+                    let textDecoration = "none";
+
+                    if (selectedFile.endsWith(".css")) {
+                      if (line.match(/^[.#]?\w+/)) {
+                        color = "blue.500";
+                      } else if (line.match(/^\s+\w+:/)) {
+                        color = "green.500";
+                      } else if (line.match(/:\s*[\w#]+;/)) {
+                        color = "red.500";
+                      } else if (line.match(/\.[a-zA-Z][\w-]+/)) {
+                        color = "orange.500";
+                        fontStyle = "bold";
+                      } else if (line.match(/#[a-zA-Z][\w-]+/)) {
+                        color = "blue.800";
+                        fontStyle = "bold";
+                      } else if (line.match(/\/\*/)) {
+                        color = "gray.500";
+                        fontStyle = "italic";
+                      } else if (line.match(/@\w+/)) {
+                        color = "purple.500";
+                      } else if (line.match(/[{}\[\]]/)) {
+                        color = "blue.500";
+                      } else if (line.match(/\w+:\s*(?![\w#]+;)/)) {
+                        color = "pink.200";
+                        textDecoration = "underline";
+                      }
+                    } else if (selectedFile.endsWith(".js")) {
+                      if (line.match(/\b(function|if|return|const|let|var)\b/)) {
+                        color = "purple.500";
+                      } else if (line.match(/[a-zA-Z_$][\w$]*/)) {
+                        color = "blue.500";
+                      } else if (line.match(/".*?"|'.*?'/)) {
+                        color = "red.500";
+                      } else if (line.match(/\b\d+(\.\d+)?\b/)) {
+                        color = "green.800";
+                      } else if (line.match(/\/\/.+|\/\*[\s\S]*?\*\//)) {
+                        color = "gray.500";
+                        fontStyle = "italic";
+                      } else if (line.match(/[{}[\]()]/)) {
+                        color = "gray.600";
+                      } else if (line.match(/\b(true|false|null|undefined|NaN)\b/)) {
+                        color = "orange.500";
+                      } else if (line.match(/\w+\s*\(/)) {
+                        fontWeight = "bold";
+                      } else if (line.match(/[^=<>]=[^=]/)) {
+                        color = "pink.200";
+                        textDecoration = "underline";
+                      }
+                    }
+
+                    return (
+                      <Text key={index} color={color} fontStyle={fontStyle} fontWeight={fontWeight} textDecoration={textDecoration}>
+                        {line}
+                      </Text>
+                    );
+                  })}
+                </Box>
+              </Flex>
             </Box>
           ) : (
             <Text>Select a file to view its contents.</Text>
