@@ -15,13 +15,6 @@ const Index = () => {
     }));
   };
 
-  const handleSaveFile = () => {
-    mockFiles[selectedFile] = editedFiles[selectedFile];
-    setEditedFiles((prevState) => {
-      const { [selectedFile]: _, ...rest } = prevState;
-      return rest;
-    });
-  };
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const iconColor = useColorModeValue("gray.600", "gray.500");
@@ -111,9 +104,6 @@ const Index = () => {
                   <Box p={4} borderRadius="md" flex={1}>
                     <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} />
                   </Box>
-                  <Button onClick={handleSaveFile} mt={2}>
-                    Save
-                  </Button>
                 </Flex>
               </Box>
             </Box>
