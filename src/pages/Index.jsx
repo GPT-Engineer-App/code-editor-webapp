@@ -34,10 +34,22 @@ const Index = () => {
   `;
 
   useEffect(() => {
-    const link = document.createElement("link");
-    link.href = "https://fonts.googleapis.com/css2?family=Fira+Code&display=swap";
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
+    const fontLink = document.createElement("link");
+    fontLink.href = "https://fonts.googleapis.com/css2?family=Fira+Code&display=swap";
+    fontLink.rel = "stylesheet";
+    document.head.appendChild(fontLink);
+
+    const highlightCssLink = document.createElement("link");
+    highlightCssLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css";
+    highlightCssLink.rel = "stylesheet";
+    document.head.appendChild(highlightCssLink);
+
+    const highlightJsScript = document.createElement("script");
+    highlightJsScript.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js";
+    highlightJsScript.onload = () => {
+      window.hljs.highlightAll();
+    };
+    document.head.appendChild(highlightJsScript);
   }, []);
 
   return (
@@ -109,7 +121,9 @@ const Index = () => {
                     ))}
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
-                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} fontFamily="'Fira Code', monospace" lineHeight="1.5" />
+                    <pre>
+                      <code className={`language-${selectedFile.split(".").pop()}`}>{editedFiles[selectedFile] || mockFiles[selectedFile]}</code>
+                    </pre>
                   </Box>
                 </Flex>
               </Box>
