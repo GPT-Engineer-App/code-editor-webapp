@@ -47,22 +47,22 @@ const Index = () => {
         <Spacer />
         <Input placeholder="Search" size="sm" width="200px" bg={useColorModeValue("white", "gray.800")} color={useColorModeValue("gray.800", "white")} />
       </Flex>
-      <Flex as="main" height="calc(100vh - 60px)">
+      <Flex as="main" height="calc(100vh - 80px)" mb={4}>
         <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={6} align="center">
           <Tooltip label="Explorer" placement="right">
             <Icon as={FaFolder} color="white" boxSize={6} filter="drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3))" />
           </Tooltip>
           <Tooltip label="Search" placement="right">
-            <Icon as={FaSearch} color={iconColor} boxSize={6} />
+            <Icon as={FaSearch} color={iconColor} boxSize={6} filter="drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))" />
           </Tooltip>
           <Tooltip label="Git" placement="right">
-            <Icon as={FaGitAlt} color={iconColor} boxSize={6} />
+            <Icon as={FaGitAlt} color={iconColor} boxSize={6} filter="drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))" />
           </Tooltip>
           <Tooltip label="Debugging" placement="right">
-            <Icon as={FaBug} color={iconColor} boxSize={6} />
+            <Icon as={FaBug} color={iconColor} boxSize={6} filter="drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))" />
           </Tooltip>
           <Tooltip label="Extensions" placement="right">
-            <Icon as={FaPuzzlePiece} color={iconColor} boxSize={6} />
+            <Icon as={FaPuzzlePiece} color={iconColor} boxSize={6} filter="drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))" />
           </Tooltip>
         </VStack>
         <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch">
