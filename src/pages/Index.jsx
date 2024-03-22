@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import mockFiles from "../mockFiles";
 import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [isFileOpen, setIsFileOpen] = useState(true);
+  const [selectedFile, setSelectedFile] = useState(null);
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const iconColor = useColorModeValue("gray.600", "gray.500");
@@ -68,26 +69,26 @@ const Index = () => {
           <Heading size="md">Explorer</Heading>
           <Divider />
           <Text>📁 my-app</Text>
-          <Text pl={4}>📄 index.html</Text>
-          <Text pl={4}>📄 app.js</Text>
-          <Text pl={4}>📁 styles</Text>
-          <Text pl={8}>📄 main.css</Text>
+          {Object.entries(mockFiles).map(([fileName, fileContent]) => (
+            <Text key={fileName} pl={fileName.split("/").length * 4} cursor="pointer" onClick={() => setSelectedFile(fileName)}>
+              {fileName.split("/").pop()}
+            </Text>
+          ))}
         </VStack>
         <Box flex={1} p={4}>
-          {isFileOpen && (
+          {selectedFile ? (
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" p={4}>
-              <Flex justify="space-between" align="center" mb={4}>
-                <Heading size="md">index.html</Heading>
-                <CloseButton onClick={() => setIsFileOpen(false)} />
-              </Flex>
+              <Heading size="md" mb={4}>
+                {selectedFile}
+              </Heading>
               <Flex>
                 <Box as="pre" bg={useColorModeValue("gray.200", "gray.600")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")} width="40px" textAlign="right" mr={2}>
-                  {mockCode.split("\n").map((_, index) => (
+                  {mockFiles[selectedFile].split("\n").map((_, index) => (
                     <Text key={index}>{index + 1}</Text>
                   ))}
                 </Box>
                 <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1}>
-                  {mockCode.split("\n").map((line, index) => {
+                  {mockFiles[selectedFile].split("\n").map((line, index) => {
                     let color = "white";
                     if (line.includes("<!DOCTYPE") || line.includes("<html") || line.includes("<head") || line.includes("<body") || line.includes("<h1") || line.includes("<p")) {
                       color = "blue.500";
@@ -107,6 +108,8 @@ const Index = () => {
                 </Box>
               </Flex>
             </Box>
+          ) : (
+            <Text>Select a file to view its contents.</Text>
           )}
         </Box>
       </Flex>
