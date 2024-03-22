@@ -40,7 +40,7 @@ const Index = () => {
     document.head.appendChild(fontLink);
 
     const highlightCssLink = document.createElement("link");
-    highlightCssLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css";
+    highlightCssLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css";
     highlightCssLink.rel = "stylesheet";
     document.head.appendChild(highlightCssLink);
 
