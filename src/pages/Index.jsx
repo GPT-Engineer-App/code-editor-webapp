@@ -104,7 +104,7 @@ const Index = () => {
               <Box p={2}>
                 <Flex>
                   <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2}>
-                    {mockFiles[selectedFile].split("\n").map((_, index) => (
+                    {(editedFiles[selectedFile] || mockFiles[selectedFile]).split("\n").map((_, index) => (
                       <Text key={index}>{index + 1}</Text>
                     ))}
                   </Box>
