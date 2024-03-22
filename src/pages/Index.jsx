@@ -69,7 +69,13 @@ const Index = () => {
     if (window.hljs) {
       window.hljs.highlightAll();
     }
-  }, [selectedFile]);
+  }, []);
+
+  useEffect(() => {
+    if (window.hljs) {
+      window.hljs.highlightAll();
+    }
+  }, [selectedFile, editedFiles]);
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
