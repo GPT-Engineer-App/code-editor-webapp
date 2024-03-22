@@ -46,11 +46,14 @@ const Index = () => {
 
     const highlightJsScript = document.createElement("script");
     highlightJsScript.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js";
-    highlightJsScript.onload = () => {
-      window.hljs.highlightAll();
-    };
     document.head.appendChild(highlightJsScript);
   }, []);
+
+  useEffect(() => {
+    if (window.hljs) {
+      window.hljs.highlightAll();
+    }
+  }, [selectedFile]);
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
