@@ -123,27 +123,18 @@ const Index = () => {
                           color = "pink.200";
                           textDecoration = "underline";
                         }
-                      } else if (selectedFile.endsWith(".js")) {
-                        if (line.match(/\b(function|if|return|const|let|var)\b/)) {
-                          color = "purple.500";
-                        } else if (line.match(/[a-zA-Z_$][\w$]*/)) {
+                      } else if (selectedFile.endsWith(".html")) {
+                        if (line.match(/<\/?[a-z][^>]*>/i)) {
                           color = "blue.500";
-                        } else if (line.match(/".*?"|'.*?'/)) {
+                        } else if (line.match(/\s[a-z][^=]*=/i)) {
                           color = "red.500";
-                        } else if (line.match(/\b\d+(\.\d+)?\b/)) {
-                          color = "green.800";
-                        } else if (line.match(/\/\/.+|\/\*[\s\S]*?\*\//)) {
+                        } else if (line.match(/=\s*"[^"]*"/)) {
+                          color = "green.500";
+                        } else if (line.match(/<!--.*?-->/)) {
                           color = "gray.500";
                           fontStyle = "italic";
-                        } else if (line.match(/[{}[\]()]/)) {
-                          color = "gray.600";
-                        } else if (line.match(/\b(true|false|null|undefined|NaN)\b/)) {
-                          color = "orange.500";
-                        } else if (line.match(/\w+\s*\(/)) {
-                          fontWeight = "bold";
-                        } else if (line.match(/[^=<>]=[^=]/)) {
-                          color = "pink.200";
-                          textDecoration = "underline";
+                        } else {
+                          color = "black";
                         }
                       }
 
