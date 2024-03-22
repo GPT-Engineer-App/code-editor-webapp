@@ -40,7 +40,7 @@ const Index = () => {
           <Button variant="ghost" color={iconColor}>
             View
           </Button>
-          <Button variant="ghost" color={iconColor}>
+          <Button variant="ghost" bg="blue.500" color="white" _hover={{ boxShadow: "0 0 10px rgba(255, 255, 255, 0.3)" }}>
             Run
           </Button>
         </HStack>
