@@ -42,16 +42,31 @@ const Index = () => {
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
-      {}
+      <Flex as="header" align="center" justify="space-between" p={4} borderBottomWidth={1} borderBottomColor={borderColor}>
+        <Heading size="lg">My Web App</Heading>
+        <Button onClick={toggleColorMode}>{colorMode === "light" ? "Dark" : "Light"} Mode</Button>
+      </Flex>
       <Flex as="main" height="calc(100vh - 60px)">
-        {}
+        <Box width="200px" bg={useColorModeValue("gray.100", "gray.900")} p={4} borderRightWidth={1} borderRightColor={borderColor}>
+          <Heading size="md" mb={4}>
+            Files
+          </Heading>
+          <VStack align="stretch" spacing={2}>
+            {Object.keys(mockFiles).map((file) => (
+              <Box key={file} cursor="pointer" onClick={() => setSelectedFile(file)} bg={selectedFile === file ? "blue.500" : "transparent"} p={2} borderRadius="md">
+                <Icon as={FaFile} color={iconColor} mr={2} />
+                <Text>{file}</Text>
+              </Box>
+            ))}
+          </VStack>
+        </Box>
         <Box flex={1} p={4}>
           {mockFiles[selectedFile] ? (
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" p={4}>
               <Flex justify="space-between" align="center" mb={4}>
                 <Heading size="md">{selectedFile}</Heading>
                 {editMode && (
-                  <Button colorScheme="blue" size="sm" onClick={handleSave}>
+                  <Button colorScheme="blue" size="sm" onClick={handleSave} bg="blue.500" color="white" _hover={{ bg: "blue.600" }}>
                     Save
                   </Button>
                 )}
@@ -84,7 +99,7 @@ const Index = () => {
                   </Box>
                 ) : (
                   <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1} onClick={handleEditorClick}>
-                    {}
+                    {mockFiles[selectedFile]}
                   </Box>
                 )}
               </Flex>
