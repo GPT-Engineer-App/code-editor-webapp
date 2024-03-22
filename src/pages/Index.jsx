@@ -48,9 +48,9 @@ const Index = () => {
         <Input placeholder="Search" size="sm" width="200px" bg={useColorModeValue("white", "gray.800")} color={useColorModeValue("gray.800", "white")} />
       </Flex>
       <Flex as="main" height="calc(100vh - 60px)">
-        <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={4} align="center">
+        <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={6} align="center">
           <Tooltip label="Explorer" placement="right">
-            <Icon as={FaFolder} color={iconColor} boxSize={6} />
+            <Icon as={FaFolder} color="white" boxSize={6} />
           </Tooltip>
           <Tooltip label="Search" placement="right">
             <Icon as={FaSearch} color={iconColor} boxSize={6} />
@@ -93,66 +93,66 @@ const Index = () => {
                     ))}
                   </Box>
                   <Box as="pre" p={4} borderRadius="md" flex={1}>
-                  {mockFiles[selectedFile].split("\n").map((line, index) => {
-                    let color = "white";
-                    let fontStyle = "normal";
-                    let fontWeight = "normal";
-                    let textDecoration = "none";
+                    {mockFiles[selectedFile].split("\n").map((line, index) => {
+                      let color = "white";
+                      let fontStyle = "normal";
+                      let fontWeight = "normal";
+                      let textDecoration = "none";
 
-                    if (selectedFile.endsWith(".css")) {
-                      if (line.match(/^[.#]?\w+/)) {
-                        color = "blue.500";
-                      } else if (line.match(/^\s+\w+:/)) {
-                        color = "green.500";
-                      } else if (line.match(/:\s*[\w#]+;/)) {
-                        color = "red.500";
-                      } else if (line.match(/\.[a-zA-Z][\w-]+/)) {
-                        color = "orange.500";
-                        fontStyle = "bold";
-                      } else if (line.match(/#[a-zA-Z][\w-]+/)) {
-                        color = "blue.800";
-                        fontStyle = "bold";
-                      } else if (line.match(/\/\*/)) {
-                        color = "gray.500";
-                        fontStyle = "italic";
-                      } else if (line.match(/@\w+/)) {
-                        color = "purple.500";
-                      } else if (line.match(/[{}\[\]]/)) {
-                        color = "blue.500";
-                      } else if (line.match(/\w+:\s*(?![\w#]+;)/)) {
-                        color = "pink.200";
-                        textDecoration = "underline";
+                      if (selectedFile.endsWith(".css")) {
+                        if (line.match(/^[.#]?\w+/)) {
+                          color = "blue.500";
+                        } else if (line.match(/^\s+\w+:/)) {
+                          color = "green.500";
+                        } else if (line.match(/:\s*[\w#]+;/)) {
+                          color = "red.500";
+                        } else if (line.match(/\.[a-zA-Z][\w-]+/)) {
+                          color = "orange.500";
+                          fontStyle = "bold";
+                        } else if (line.match(/#[a-zA-Z][\w-]+/)) {
+                          color = "blue.800";
+                          fontStyle = "bold";
+                        } else if (line.match(/\/\*/)) {
+                          color = "gray.500";
+                          fontStyle = "italic";
+                        } else if (line.match(/@\w+/)) {
+                          color = "purple.500";
+                        } else if (line.match(/[{}\[\]]/)) {
+                          color = "blue.500";
+                        } else if (line.match(/\w+:\s*(?![\w#]+;)/)) {
+                          color = "pink.200";
+                          textDecoration = "underline";
+                        }
+                      } else if (selectedFile.endsWith(".js")) {
+                        if (line.match(/\b(function|if|return|const|let|var)\b/)) {
+                          color = "purple.500";
+                        } else if (line.match(/[a-zA-Z_$][\w$]*/)) {
+                          color = "blue.500";
+                        } else if (line.match(/".*?"|'.*?'/)) {
+                          color = "red.500";
+                        } else if (line.match(/\b\d+(\.\d+)?\b/)) {
+                          color = "green.800";
+                        } else if (line.match(/\/\/.+|\/\*[\s\S]*?\*\//)) {
+                          color = "gray.500";
+                          fontStyle = "italic";
+                        } else if (line.match(/[{}[\]()]/)) {
+                          color = "gray.600";
+                        } else if (line.match(/\b(true|false|null|undefined|NaN)\b/)) {
+                          color = "orange.500";
+                        } else if (line.match(/\w+\s*\(/)) {
+                          fontWeight = "bold";
+                        } else if (line.match(/[^=<>]=[^=]/)) {
+                          color = "pink.200";
+                          textDecoration = "underline";
+                        }
                       }
-                    } else if (selectedFile.endsWith(".js")) {
-                      if (line.match(/\b(function|if|return|const|let|var)\b/)) {
-                        color = "purple.500";
-                      } else if (line.match(/[a-zA-Z_$][\w$]*/)) {
-                        color = "blue.500";
-                      } else if (line.match(/".*?"|'.*?'/)) {
-                        color = "red.500";
-                      } else if (line.match(/\b\d+(\.\d+)?\b/)) {
-                        color = "green.800";
-                      } else if (line.match(/\/\/.+|\/\*[\s\S]*?\*\//)) {
-                        color = "gray.500";
-                        fontStyle = "italic";
-                      } else if (line.match(/[{}[\]()]/)) {
-                        color = "gray.600";
-                      } else if (line.match(/\b(true|false|null|undefined|NaN)\b/)) {
-                        color = "orange.500";
-                      } else if (line.match(/\w+\s*\(/)) {
-                        fontWeight = "bold";
-                      } else if (line.match(/[^=<>]=[^=]/)) {
-                        color = "pink.200";
-                        textDecoration = "underline";
-                      }
-                    }
 
-                    return (
-                      <Text key={index} color={color} fontStyle={fontStyle} fontWeight={fontWeight} textDecoration={textDecoration}>
-                        {line}
-                      </Text>
-                    );
-                  })}
+                      return (
+                        <Text key={index} color={color} fontStyle={fontStyle} fontWeight={fontWeight} textDecoration={textDecoration}>
+                          {line}
+                        </Text>
+                      );
+                    })}
                   </Box>
                 </Flex>
               </Box>
