@@ -5,7 +5,7 @@ import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCo
 
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState("index.html");
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const iconColor = useColorModeValue("gray.600", "gray.500");
@@ -76,7 +76,7 @@ const Index = () => {
           ))}
         </VStack>
         <Box flex={1} p={4}>
-          {selectedFile ? (
+          {mockFiles[selectedFile] ? (
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" p={4}>
               <Heading size="md" mb={4}>
                 {selectedFile}
