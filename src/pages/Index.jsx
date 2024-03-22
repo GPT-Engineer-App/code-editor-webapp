@@ -3,6 +3,22 @@ import mockFiles from "../mockFiles";
 import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
+const fileExtensionToLanguageClass = (filename) => {
+  const extension = filename.split(".").pop();
+  switch (extension) {
+    case "js":
+      return "language-javascript";
+    case "html":
+      return "language-html";
+    case "css":
+      return "language-css";
+    case "md":
+      return "language-markdown";
+    default:
+      return "language-plaintext";
+  }
+};
+
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [selectedFile, setSelectedFile] = useState("index.html");
@@ -125,7 +141,7 @@ const Index = () => {
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
                     <pre>
-                      <code className={`language-${selectedFile.split(".").pop()}`}>{editedFiles[selectedFile] || mockFiles[selectedFile]}</code>
+                      <code className={fileExtensionToLanguageClass(selectedFile)}>{editedFiles[selectedFile] || mockFiles[selectedFile]}</code>
                     </pre>
                   </Box>
                 </Flex>
