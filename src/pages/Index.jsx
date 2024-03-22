@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import mockFiles from "../mockFiles";
-import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [selectedFile, setSelectedFile] = useState("index.html");
+  const [editedFiles, setEditedFiles] = useState({});
+
+  const handleFileEdit = (fileName, fileContent) => {
+    setEditedFiles((prevState) => ({
+      ...prevState,
+      [fileName]: fileContent,
+    }));
+  };
+
+  const handleSaveFile = () => {
+    mockFiles[selectedFile] = editedFiles[selectedFile];
+    setEditedFiles((prevState) => {
+      const { [selectedFile]: _, ...rest } = prevState;
+      return rest;
+    });
+  };
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const iconColor = useColorModeValue("gray.600", "gray.500");
@@ -92,46 +108,12 @@ const Index = () => {
                       <Text key={index}>{index + 1}</Text>
                     ))}
                   </Box>
-                  <Box as="pre" p={4} borderRadius="md" flex={1}>
-                    {mockFiles[selectedFile].split("\n").map((line, index) => {
-                      let color = "white";
-                      let fontStyle = "normal";
-                      let fontWeight = "normal";
-                      let textDecoration = "none";
-
-                      if (selectedFile.endsWith(".css")) {
-                        if (line.match(/^[.#]?\w+/)) {
-                          color = "blue.500";
-                        } else if (line.match(/^\s+\w+:/)) {
-                          color = "green.500";
-                        } else if (line.match(/:\s*[\w#]+;/)) {
-                          color = "red.500";
-                        } else if (line.match(/\.[a-zA-Z][\w-]+/)) {
-                          color = "orange.500";
-                          fontStyle = "bold";
-                        } else if (line.match(/#[a-zA-Z][\w-]+/)) {
-                          color = "blue.800";
-                          fontStyle = "bold";
-                        } else if (line.match(/\/\*/)) {
-                          color = "gray.500";
-                          fontStyle = "italic";
-                        } else if (line.match(/@\w+/)) {
-                          color = "purple.500";
-                        } else if (line.match(/[{}\[\]]/)) {
-                          color = "blue.500";
-                        } else if (line.match(/\w+:\s*(?![\w#]+;)/)) {
-                          color = "pink.200";
-                          textDecoration = "underline";
-                        }
-                      }
-
-                      return (
-                        <Text key={index} color={color} fontStyle={fontStyle} fontWeight={fontWeight} textDecoration={textDecoration}>
-                          {line}
-                        </Text>
-                      );
-                    })}
+                  <Box p={4} borderRadius="md" flex={1}>
+                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} />
                   </Box>
+                  <Button onClick={handleSaveFile} mt={2}>
+                    Save
+                  </Button>
                 </Flex>
               </Box>
             </Box>
