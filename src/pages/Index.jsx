@@ -69,7 +69,7 @@ const Index = () => {
     if (window.hljs) {
       window.hljs.highlightAll();
     }
-  }, [selectedFile]);
+  });
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
