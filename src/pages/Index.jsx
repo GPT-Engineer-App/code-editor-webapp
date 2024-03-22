@@ -87,11 +87,23 @@ const Index = () => {
                   ))}
                 </Box>
                 <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1}>
-                  {mockCode.split("\n").map((line, index) => (
-                    <Text key={index} color={line.includes("<") ? "blue.500" : line.includes("<!DOCTYPE") ? "green.500" : line.includes("<title>") ? "purple.500" : line.includes("<script") ? "red.500" : "white"}>
-                      {line}
-                    </Text>
-                  ))}
+                  {mockCode.split("\n").map((line, index) => {
+                    let color = "white";
+                    if (line.includes("<!DOCTYPE") || line.includes("<html") || line.includes("<head") || line.includes("<body") || line.includes("<h1") || line.includes("<p")) {
+                      color = "blue.500";
+                    } else if (line.includes("title") || line.includes("script")) {
+                      color = "green.500";
+                    } else if (line.includes("My Web App") || line.includes("This is a simple web app.") || line.includes("app.js")) {
+                      color = "red.500";
+                    } else if (line.includes("<!--")) {
+                      color = "gray.500";
+                    }
+                    return (
+                      <Text key={index} color={color}>
+                        {line}
+                      </Text>
+                    );
+                  })}
                 </Box>
               </Flex>
             </Box>
