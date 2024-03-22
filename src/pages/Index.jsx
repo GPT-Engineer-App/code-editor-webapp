@@ -5,9 +5,9 @@ import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCo
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [isFileOpen, setIsFileOpen] = useState(true);
-  const bgColor = useColorModeValue("gray.100", "gray.900");
+  const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
-  const iconColor = useColorModeValue("gray.600", "gray.400");
+  const iconColor = useColorModeValue("gray.600", "gray.500");
 
   const mockCode = `
     <!DOCTYPE html>
@@ -47,7 +47,7 @@ const Index = () => {
         <Input placeholder="Search" size="sm" width="200px" bg={useColorModeValue("white", "gray.800")} color={useColorModeValue("gray.800", "white")} />
       </Flex>
       <Flex as="main" height="calc(100vh - 60px)">
-        <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.800")} p={2} spacing={4} align="center">
+        <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={4} align="center">
           <Tooltip label="Explorer" placement="right">
             <Icon as={FaFolder} color={iconColor} boxSize={6} />
           </Tooltip>
@@ -64,7 +64,7 @@ const Index = () => {
             <Icon as={FaPuzzlePiece} color={iconColor} boxSize={6} />
           </Tooltip>
         </VStack>
-        <VStack as="section" width="300px" bg={useColorModeValue("white", "gray.900")} p={4} spacing={2} align="stretch">
+        <VStack as="section" width="300px" bg={useColorModeValue("white", "gray.700")} p={4} spacing={2} align="stretch">
           <Heading size="md">Explorer</Heading>
           <Divider />
           <Text>📁 my-app</Text>
@@ -80,7 +80,7 @@ const Index = () => {
                 <Heading size="md">index.html</Heading>
                 <CloseButton onClick={() => setIsFileOpen(false)} />
               </Flex>
-              <Box as="pre" bg={useColorModeValue("gray.100", "gray.800")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")}>
+              <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")}>
                 {mockCode}
               </Box>
             </Box>
