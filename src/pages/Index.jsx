@@ -50,7 +50,7 @@ const Index = () => {
       <Flex as="main" height="calc(100vh - 60px)">
         <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={6} align="center">
           <Tooltip label="Explorer" placement="right">
-            <Icon as={FaFolder} color="white" boxSize={6} />
+            <Icon as={FaFolder} color="white" boxSize={6} filter="drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3))" />
           </Tooltip>
           <Tooltip label="Search" placement="right">
             <Icon as={FaSearch} color={iconColor} boxSize={6} />
