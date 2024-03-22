@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Heading, Text, Input, IconButton, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
 
 const Index = () => {
@@ -26,22 +26,22 @@ const Index = () => {
   return (
     <Box bg={bgColor} minH="100vh" color="white">
       <Flex as="header" align="center" px={4} py={2} borderBottomWidth={1} borderColor={borderColor}>
-        <HStack spacing={4}>
-          <Tooltip label="New File">
-            <IconButton icon={<FaFile />} variant="ghost" color={iconColor} aria-label="New File" />
-          </Tooltip>
-          <Tooltip label="Edit">
-            <IconButton icon={<FaEdit />} variant="ghost" color={iconColor} aria-label="Edit" />
-          </Tooltip>
-          <Tooltip label="Selection">
-            <IconButton icon={<FaMousePointer />} variant="ghost" color={iconColor} aria-label="Selection" />
-          </Tooltip>
-          <Tooltip label="View">
-            <IconButton icon={<FaEye />} variant="ghost" color={iconColor} aria-label="View" />
-          </Tooltip>
-          <Tooltip label="Run">
-            <IconButton icon={<FaPlay />} variant="ghost" color={iconColor} aria-label="Run" />
-          </Tooltip>
+        <HStack spacing={2}>
+          <Button variant="ghost" color={iconColor}>
+            File
+          </Button>
+          <Button variant="ghost" color={iconColor}>
+            Edit
+          </Button>
+          <Button variant="ghost" color={iconColor}>
+            Selection
+          </Button>
+          <Button variant="ghost" color={iconColor}>
+            View
+          </Button>
+          <Button variant="ghost" color={iconColor}>
+            Run
+          </Button>
         </HStack>
         <Spacer />
         <Input placeholder="Search" size="sm" width="200px" bg={useColorModeValue("white", "gray.800")} color={useColorModeValue("gray.800", "white")} />
