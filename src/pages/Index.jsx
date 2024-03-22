@@ -47,7 +47,7 @@ const Index = () => {
         <Spacer />
         <Input placeholder="Search" size="sm" width="200px" bg={useColorModeValue("white", "gray.800")} color={useColorModeValue("gray.800", "white")} />
       </Flex>
-      <Flex as="main" height="calc(100vh - 60px)">
+      <Flex as="main" minHeight="calc(100vh - 60px)" flex={1}>
         <VStack as="aside" width="60px" bg={useColorModeValue("gray.200", "gray.900")} p={2} spacing={6} align="center">
           <Tooltip label="Explorer" placement="right">
             <Icon as={FaFolder} color="white" boxSize={6} filter="drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3))" />
@@ -75,7 +75,7 @@ const Index = () => {
             </Text>
           ))}
         </VStack>
-        <Box flex={1} p={4}>
+        <Box flex={1} p={4} bg={useColorModeValue("gray.200", "gray.700")}>
           {mockFiles[selectedFile] ? (
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" bg={useColorModeValue("gray.200", "gray.700")} p={2}>
               <Flex align="center" mb={2}>
