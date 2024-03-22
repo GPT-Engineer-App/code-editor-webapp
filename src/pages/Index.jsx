@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import mockFiles from "../mockFiles";
 import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
 import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
@@ -32,6 +32,13 @@ const Index = () => {
       </body>
     </html>
   `;
+
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.href = "https://fonts.googleapis.com/css2?family=Fira+Code&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+  }, []);
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
@@ -102,7 +109,7 @@ const Index = () => {
                     ))}
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
-                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} />
+                    <Textarea value={editedFiles[selectedFile] || mockFiles[selectedFile]} onChange={(e) => handleFileEdit(selectedFile, e.target.value)} height="400px" width="100%" bg={useColorModeValue("gray.100", "gray.800")} color={useColorModeValue("gray.800", "white")} border="none" _focus={{ outline: "none" }} fontFamily="'Fira Code', monospace" />
                   </Box>
                 </Flex>
               </Box>
