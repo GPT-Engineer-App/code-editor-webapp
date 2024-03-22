@@ -123,19 +123,6 @@ const Index = () => {
                           color = "pink.200";
                           textDecoration = "underline";
                         }
-                      } else if (selectedFile.endsWith(".html")) {
-                        if (line.match(/<\/?[a-z][^>]*>/i)) {
-                          color = "blue.500";
-                        } else if (line.match(/\s[a-z][^=]*=/i)) {
-                          color = "red.500";
-                        } else if (line.match(/=\s*"[^"]*"/)) {
-                          color = "green.500";
-                        } else if (line.match(/<!--.*?-->/)) {
-                          color = "gray.500";
-                          fontStyle = "italic";
-                        } else {
-                          color = "black";
-                        }
                       }
 
                       return (
