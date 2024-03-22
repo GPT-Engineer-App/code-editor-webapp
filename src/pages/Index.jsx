@@ -65,7 +65,7 @@ const Index = () => {
             <Icon as={FaPuzzlePiece} color={iconColor} boxSize={6} />
           </Tooltip>
         </VStack>
-        <VStack as="section" width="300px" bg={useColorModeValue("white", "gray.700")} p={4} spacing={2} align="stretch">
+        <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch">
           <Heading size="md">Explorer</Heading>
           <Divider />
           <Text>📁 my-app</Text>
@@ -77,17 +77,22 @@ const Index = () => {
         </VStack>
         <Box flex={1} p={4}>
           {mockFiles[selectedFile] ? (
-            <Box borderWidth={1} borderColor={borderColor} borderRadius="md" p={4}>
-              <Heading size="md" mb={4}>
-                {selectedFile}
-              </Heading>
-              <Flex>
-                <Box as="pre" bg={useColorModeValue("gray.200", "gray.600")} p={4} borderRadius="md" color={useColorModeValue("gray.800", "white")} width="40px" textAlign="right" mr={2}>
-                  {mockFiles[selectedFile].split("\n").map((_, index) => (
-                    <Text key={index}>{index + 1}</Text>
-                  ))}
-                </Box>
-                <Box as="pre" bg={useColorModeValue("gray.100", "gray.700")} p={4} borderRadius="md" flex={1}>
+            <Box borderWidth={1} borderColor={borderColor} borderRadius="md" bg={useColorModeValue("gray.200", "gray.700")} p={2}>
+              <Flex align="center" mb={2}>
+                <Text fontSize="lg" fontWeight="bold" mr={2}>
+                  {selectedFile}
+                </Text>
+                <Spacer />
+                <CloseButton size="sm" onClick={() => setSelectedFile(null)} />
+              </Flex>
+              <Box p={2}>
+                <Flex>
+                  <Box as="pre" p={4} borderRadius="md" color="white" width="40px" textAlign="right" mr={2}>
+                    {mockFiles[selectedFile].split("\n").map((_, index) => (
+                      <Text key={index}>{index + 1}</Text>
+                    ))}
+                  </Box>
+                  <Box as="pre" p={4} borderRadius="md" flex={1}>
                   {mockFiles[selectedFile].split("\n").map((line, index) => {
                     let color = "white";
                     let fontStyle = "normal";
@@ -148,8 +153,9 @@ const Index = () => {
                       </Text>
                     );
                   })}
-                </Box>
-              </Flex>
+                  </Box>
+                </Flex>
+              </Box>
             </Box>
           ) : (
             <Text>Select a file to view its contents.</Text>
