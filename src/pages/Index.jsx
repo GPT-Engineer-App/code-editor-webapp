@@ -59,15 +59,16 @@ const Index = () => {
             _hover={{ boxShadow: "0 0 8px rgba(255, 255, 255, 0.4)" }}
             onClick={() => {
               toast({
-                title: "This is bound to fly!✨",
                 status: "success",
                 duration: 2000,
                 isClosable: false,
                 position: "bottom",
-                containerStyle: {
-                  backgroundColor: "#333",
-                  color: "white",
-                },
+                render: () => (
+                  <Box color='white' p={3} bg={useColorModeValue("gray.200", "gray.900")} align="center"  borderRadius="5">
+                    This is bound to fly!✨
+                  </Box>
+                ),
+
               });
             }}
           >
