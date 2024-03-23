@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import mockFiles from "../mockFiles";
-import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
-import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece, FaStar } from "react-icons/fa";
+import CodeHighlighter from '../components/CodeHighlighter';
+import { Box, Flex, Heading, Text, Input, Button, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
+import { FaSearch, FaFolder, FaGitAlt, FaBug, FaPuzzlePiece, FaStar } from "react-icons/fa";
 
-const fileExtensionToLanguageClass = (filename) => {
+const fileType = (filename) => {
   const extension = filename.split(".").pop();
-  switch (extension) {
-    case "js":
-      return "language-javascript";
-    case "html":
-      return "language-html";
-    case "css":
-      return "language-css";
-    case "md":
-      return "language-markdown";
-    default:
-      return "language-plaintext";
-  }
+  return extension;
 };
 
 const Index = () => {
@@ -34,52 +24,14 @@ const Index = () => {
     });
   };
 
-  const handleFileEdit = (fileName, fileContent) => {
-    setEditedFiles((prevState) => ({
-      ...prevState,
-      [fileName]: fileContent,
-    }));
+  const handleCodeEdit = (event) => {
+    const updatedContent = event.target.innerText;
+    setEditedFiles({ ...editedFiles, [selectedFile]: updatedContent });
   };
 
   const bgColor = useColorModeValue("gray.100", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
   const iconColor = useColorModeValue("gray.600", "gray.500");
-
-  const mockCode = `
-  <!DOCTYPE html>
-    <html>
-      <head>
-        <title>My Web App</title>
-      </head>
-      <body>
-        <h1>Welcome to my web app!</h1>
-        <p>This is a simple web app.</p>
-        <script src="app.js"></script>
-      </body>
-    </html>`;
-
-  useEffect(() => {
-    const highlightCssLink = document.createElement("link");
-    highlightCssLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css";
-    highlightCssLink.rel = "stylesheet";
-    document.head.appendChild(highlightCssLink);
-
-    const highlightJsScript = document.createElement("script");
-    highlightJsScript.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js";
-    document.head.appendChild(highlightJsScript);
-  }, []);
-
-  useEffect(() => {
-    if (window.hljs) {
-      window.hljs.highlightAll();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (window.hljs) {
-      window.hljs.highlightAll();
-    }
-  }, [selectedFile, editedFiles]);
 
   return (
     <Box bg={bgColor} minH="100vh" color="white">
@@ -134,17 +86,8 @@ const Index = () => {
             const filePath = fileName.split("/");
             const parentFolders = filePath.slice(0, -1);
             const isVisible = parentFolders.every((folder) => openFolders.includes(folder));
-
             return isVisible ? (
               <Text key={fileName} pl={filePath.length * 4} cursor="pointer" onClick={() => setSelectedFile(fileName)}>
-                {filePath.length > 1 && (
-                  <>
-                    {openFolders.includes(filePath.slice(0, -1).join("/")) ? "📂" : "📁"} {filePath.slice(-2)[0]}
-                    <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder(filePath.slice(0, -1).join("/"))}>
-                      {openFolders.includes(filePath.slice(0, -1).join("/")) ? "▼" : "▶"}
-                    </Box>
-                  </>
-                )}
                 📄 {filePath.pop()}
               </Text>
             ) : null;
@@ -162,23 +105,24 @@ const Index = () => {
               </Flex>
               <Box p={2}>
                 <Flex>
-                  <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2} lineHeight="1.5">
+                <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2}>
                     {(editedFiles[selectedFile] || mockFiles[selectedFile]).split("\n").map((_, index) => (
                       <Text key={index}>{index + 1}</Text>
                     ))}
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
-                    <pre>
-                      <code className={fileExtensionToLanguageClass(selectedFile)}>{editedFiles[selectedFile] || mockFiles[selectedFile]}</code>
-                    </pre>
+                  <CodeHighlighter key={selectedFile} fileType={fileType(selectedFile)}>
+                    {editedFiles[selectedFile] || mockFiles[selectedFile]}
+                  </CodeHighlighter>
                   </Box>
                 </Flex>
               </Box>
             </Box>
+
           ) : (
             <VStack spacing={8}>
               <Icon as={FaStar} boxSize={120} color="black" opacity={0.15} />
-              <Text>Select a file in the explorer and start building! 🎉</Text>
+              <Text>Select a file and start building! 🎉</Text>
             </VStack>
           )}
         </Box>
