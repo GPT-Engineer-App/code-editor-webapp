@@ -177,7 +177,7 @@ const Index = () => {
             </Box>
           ) : (
             <VStack spacing={8}>
-              <Icon as={FaStar} boxSize={84} color="black" opacity={0.1} />
+              <Icon as={FaStar} boxSize={120} color="black" opacity={0.15} />
               <Text>Select a file in the explorer and start building! 🎉</Text>
             </VStack>
           )}
