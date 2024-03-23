@@ -61,9 +61,13 @@ const Index = () => {
               toast({
                 title: "This is bound to fly!✨",
                 status: "success",
-                duration: 3000,
-                isClosable: true,
+                duration: 2000,
+                isClosable: false,
                 position: "bottom",
+                containerStyle: {
+                  backgroundColor: "#333",
+                  color: "white",
+                },
               });
             }}
           >
