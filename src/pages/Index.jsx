@@ -22,6 +22,17 @@ const fileExtensionToLanguageClass = (filename) => {
 const Index = () => {
   const [selectedFile, setSelectedFile] = useState("index.html");
   const [editedFiles, setEditedFiles] = useState({});
+  const [openFolders, setOpenFolders] = useState([]);
+
+  const toggleFolder = (folderName) => {
+    setOpenFolders((prevOpenFolders) => {
+      if (prevOpenFolders.includes(folderName)) {
+        return prevOpenFolders.filter((folder) => folder !== folderName);
+      } else {
+        return [...prevOpenFolders, folderName];
+      }
+    });
+  };
 
   const handleFileEdit = (fileName, fileContent) => {
     setEditedFiles((prevState) => ({
@@ -114,12 +125,31 @@ const Index = () => {
         <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch">
           <Heading size="md">Explorer</Heading>
           <Divider />
-          <Text>📁 my-app</Text>
-          {Object.entries(mockFiles).map(([fileName, fileContent]) => (
-            <Text key={fileName} pl={fileName.split("/").length * 4} cursor="pointer" onClick={() => setSelectedFile(fileName)}>
-             📄 {fileName.split("/").pop()}
-            </Text>
-          ))}
+          <Text>
+            {openFolders.includes("my-app") ? "📂" : "📁"} my-app
+            <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder("my-app")}>
+              {openFolders.includes("my-app") ? "▼" : "▶️"}
+            </Box>
+          </Text>
+          {Object.entries(mockFiles).map(([fileName, fileContent]) => {
+            const filePath = fileName.split("/");
+            const parentFolders = filePath.slice(0, -1);
+            const isVisible = parentFolders.every((folder) => openFolders.includes(folder));
+
+            return isVisible ? (
+              <Text key={fileName} pl={filePath.length * 4} cursor="pointer" onClick={() => setSelectedFile(fileName)}>
+                {filePath.length > 1 && (
+                  <>
+                    {openFolders.includes(filePath.slice(0, -1).join("/")) ? "📂" : "📁"} {filePath.slice(-2)[0]}
+                    <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder(filePath.slice(0, -1).join("/"))}>
+                      {openFolders.includes(filePath.slice(0, -1).join("/")) ? "▼" : "▶️"}
+                    </Box>
+                  </>
+                )}
+                📄 {filePath.pop()}
+              </Text>
+            ) : null;
+          })}
         </VStack>
         <Box flex={1} p={4} bg={useColorModeValue("gray.200", "gray.700")}>
           {mockFiles[selectedFile] ? (
