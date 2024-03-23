@@ -125,10 +125,9 @@ const Index = () => {
         <VStack as="section" width="300px" bg={useColorModeValue("gray.100", "gray.800")} p={4} spacing={2} align="stretch">
           <Heading size="md">Explorer</Heading>
           <Divider />
-          <Text>
-            {openFolders.includes("my-app") ? "📂" : "📁"} my-app
+          <Text fontWeight="bold">
             <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder("my-app")}>
-              {openFolders.includes("my-app") ? "▼" : "▶️"}
+              {openFolders.includes("my-app") ? "📁" : "📂"} my-app
             </Box>
           </Text>
           {Object.entries(mockFiles).map(([fileName, fileContent]) => {
