@@ -60,10 +60,7 @@ const Index = () => {
             onClick={() => {
               toast({
                 title: "This is bound to fly!✨",
-                status: "info",
-                variant: "solid",
-                textColor: "white",
-                fontWeight: "normal",
+                status: "success",
                 duration: 3000,
                 isClosable: true,
                 position: "bottom",
