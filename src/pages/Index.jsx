@@ -20,7 +20,6 @@ const fileExtensionToLanguageClass = (filename) => {
 };
 
 const Index = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
   const [selectedFile, setSelectedFile] = useState("index.html");
   const [editedFiles, setEditedFiles] = useState({});
 
@@ -36,7 +35,7 @@ const Index = () => {
   const iconColor = useColorModeValue("gray.600", "gray.500");
 
   const mockCode = `
-    <!DOCTYPE html>
+  <!DOCTYPE html>
     <html>
       <head>
         <title>My Web App</title>
@@ -46,15 +45,9 @@ const Index = () => {
         <p>This is a simple web app.</p>
         <script src="app.js"></script>
       </body>
-    </html>
-  `;
+    </html>`;
 
   useEffect(() => {
-    const fontLink = document.createElement("link");
-    fontLink.href = "https://fonts.googleapis.com/css2?family=Fira+Code&display=swap";
-    fontLink.rel = "stylesheet";
-    document.head.appendChild(fontLink);
-
     const highlightCssLink = document.createElement("link");
     highlightCssLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css";
     highlightCssLink.rel = "stylesheet";
@@ -124,7 +117,7 @@ const Index = () => {
           <Text>📁 my-app</Text>
           {Object.entries(mockFiles).map(([fileName, fileContent]) => (
             <Text key={fileName} pl={fileName.split("/").length * 4} cursor="pointer" onClick={() => setSelectedFile(fileName)}>
-              {fileName.split("/").pop()}
+             📄 {fileName.split("/").pop()}
             </Text>
           ))}
         </VStack>
@@ -133,7 +126,7 @@ const Index = () => {
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" bg={useColorModeValue("gray.200", "gray.700")} p={2}>
               <Flex align="center" mb={2}>
                 <Text fontSize="lg" fontWeight="bold" mr={2}>
-                  {selectedFile}
+                📄 {selectedFile}
                 </Text>
                 <Spacer />
                 <CloseButton size="sm" onClick={() => setSelectedFile(null)} />
@@ -154,7 +147,7 @@ const Index = () => {
               </Box>
             </Box>
           ) : (
-            <Text>Select a file to view its contents.</Text>
+            <Text>Select a file in the explorer and start building! ✨</Text>
           )}
         </Box>
       </Flex>
