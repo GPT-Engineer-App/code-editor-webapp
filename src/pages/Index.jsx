@@ -127,7 +127,7 @@ const Index = () => {
           <Divider />
           <Text fontWeight="bold">
             <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder("my-app")}>
-              {openFolders.includes("my-app") ? "📁" : "📂"} my-app
+              {openFolders.includes("my-app") ? "📂" : "📁"} my-app
             </Box>
           </Text>
           {Object.entries(mockFiles).map(([fileName, fileContent]) => {
@@ -141,7 +141,7 @@ const Index = () => {
                   <>
                     {openFolders.includes(filePath.slice(0, -1).join("/")) ? "📂" : "📁"} {filePath.slice(-2)[0]}
                     <Box as="span" ml={2} cursor="pointer" onClick={() => toggleFolder(filePath.slice(0, -1).join("/"))}>
-                      {openFolders.includes(filePath.slice(0, -1).join("/")) ? "▼" : "▶️"}
+                      {openFolders.includes(filePath.slice(0, -1).join("/")) ? "▼" : "▶"}
                     </Box>
                   </>
                 )}
@@ -155,7 +155,7 @@ const Index = () => {
             <Box borderWidth={1} borderColor={borderColor} borderRadius="md" bg={useColorModeValue("gray.200", "gray.700")} p={2}>
               <Flex align="center" mb={2}>
                 <Text fontSize="lg" fontWeight="bold" mr={2}>
-                📄 {selectedFile}
+                  📄 {selectedFile}
                 </Text>
                 <Spacer />
                 <CloseButton size="sm" onClick={() => setSelectedFile(null)} />
