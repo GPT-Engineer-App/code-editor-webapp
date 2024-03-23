@@ -64,11 +64,10 @@ const Index = () => {
                 isClosable: false,
                 position: "bottom",
                 render: () => (
-                  <Box color='white' p={3} bg={useColorModeValue("gray.200", "gray.900")} align="center"  borderRadius="5">
+                  <Box color="white" p={3} bg={useColorModeValue("gray.200", "gray.900")} align="center" borderRadius="5">
                     This is bound to fly!✨
                   </Box>
                 ),
-
               });
             }}
           >
@@ -141,8 +140,8 @@ const Index = () => {
               </Box>
             </Box>
           ) : (
-            <VStack spacing={8}>
-              <Icon as={FaStar} boxSize={120} color="black" opacity={0.15} />
+            <VStack spacing={8} justify="center" height="100%">
+              <Icon as={FaStar} boxSize={164} color="black" opacity={0.15} />
               <Text>Select a file and start building! 🎉</Text>
             </VStack>
           )}
