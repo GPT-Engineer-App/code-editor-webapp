@@ -140,7 +140,7 @@ const Index = () => {
               </Box>
             </Box>
           ) : (
-            <VStack spacing={8} justify="center" height="100%">
+            <VStack spacing={8} justify="flex-start" height="100%" mt="15%">
               <Icon as={FaStar} boxSize={164} color="black" opacity={0.15} />
               <Text>Select a file and start building! 🎉</Text>
             </VStack>
