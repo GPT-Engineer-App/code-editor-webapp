@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import mockFiles from "../mockFiles";
 import { Box, Flex, Heading, Text, Input, Button, useColorMode, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton, Textarea } from "@chakra-ui/react";
-import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece } from "react-icons/fa";
+import { FaFile, FaEdit, FaMousePointer, FaEye, FaPlay, FaSearch, FaFolder, FaCode, FaGitAlt, FaBug, FaPuzzlePiece, FaStar } from "react-icons/fa";
 
 const fileExtensionToLanguageClass = (filename) => {
   const extension = filename.split(".").pop();
@@ -176,7 +176,10 @@ const Index = () => {
               </Box>
             </Box>
           ) : (
-            <Text>Select a file in the explorer and start building! ✨</Text>
+            <VStack spacing={8}>
+              <Icon as={FaStar} boxSize={84} color="black" opacity={0.1} />
+              <Text>Select a file in the explorer and start building! 🎉</Text>
+            </VStack>
           )}
         </Box>
       </Flex>
