@@ -1,6 +1,5 @@
 const mockFiles = {
-  "index.html": `
-    <!DOCTYPE html>
+  "index.html": `<!DOCTYPE html>
     <html>
       <head>
         <title>My Web App</title>
@@ -10,8 +9,7 @@ const mockFiles = {
         <p>This is a simple web app.</p>
         <script src="app.js"></script>
       </body>
-    </html>
-  `,
+    </html>`,
   "app.js": `
     console.log("Hello, World!");
   `,
@@ -24,18 +22,15 @@ const mockFiles = {
     
     h1 {
       color: #333;
-    }
-  `,
-  "README.md": `
-    # My Web App
+    }`,
+  "README.md": `# My Web App
     
     This is a simple web application.
     
     ## Installation
     
     1. Clone the repository
-    2. Open index.html in your browser
-  `,
+    2. Open index.html in your browser`,
 };
 
 export default mockFiles;
