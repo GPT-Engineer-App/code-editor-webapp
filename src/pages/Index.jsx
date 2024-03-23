@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 import mockFiles from "../mockFiles";
-import CodeHighlighter from '../components/CodeHighlighter';
+import CodeHighlighter from "../components/CodeHighlighter";
 import { Box, Flex, Heading, Text, Input, Button, useColorModeValue, VStack, HStack, Divider, Icon, Spacer, Tooltip, CloseButton } from "@chakra-ui/react";
 import { FaSearch, FaFolder, FaGitAlt, FaBug, FaPuzzlePiece, FaStar } from "react-icons/fa";
 
@@ -13,6 +14,7 @@ const Index = () => {
   const [selectedFile, setSelectedFile] = useState("index.html");
   const [editedFiles, setEditedFiles] = useState({});
   const [openFolders, setOpenFolders] = useState([]);
+  const toast = useToast();
 
   const toggleFolder = (folderName) => {
     setOpenFolders((prevOpenFolders) => {
@@ -49,7 +51,22 @@ const Index = () => {
           <Button variant="ghost" color={iconColor}>
             View
           </Button>
-          <Button variant="ghost" bg="#005ce6" color="white" boxShadow="0 0 5px rgba(255, 255, 255, 0.3)" _hover={{ boxShadow: "0 0 8px rgba(255, 255, 255, 0.4)" }}>
+          <Button
+            variant="ghost"
+            bg="#005ce6"
+            color="white"
+            boxShadow="0 0 5px rgba(255, 255, 255, 0.3)"
+            _hover={{ boxShadow: "0 0 8px rgba(255, 255, 255, 0.4)" }}
+            onClick={() => {
+              toast({
+                title: "This is bound to fly!✨",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "bottom",
+              });
+            }}
+          >
             Run
           </Button>
         </HStack>
@@ -105,20 +122,19 @@ const Index = () => {
               </Flex>
               <Box p={2}>
                 <Flex>
-                <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2}>
+                  <Box as="pre" p={4} borderRadius="md" color="gray.400" width="40px" textAlign="right" mr={2}>
                     {(editedFiles[selectedFile] || mockFiles[selectedFile]).split("\n").map((_, index) => (
                       <Text key={index}>{index + 1}</Text>
                     ))}
                   </Box>
                   <Box p={4} borderRadius="md" flex={1}>
-                  <CodeHighlighter key={selectedFile} fileType={fileType(selectedFile)}>
-                    {editedFiles[selectedFile] || mockFiles[selectedFile]}
-                  </CodeHighlighter>
+                    <CodeHighlighter key={selectedFile} fileType={fileType(selectedFile)}>
+                      {editedFiles[selectedFile] || mockFiles[selectedFile]}
+                    </CodeHighlighter>
                   </Box>
                 </Flex>
               </Box>
             </Box>
-
           ) : (
             <VStack spacing={8}>
               <Icon as={FaStar} boxSize={120} color="black" opacity={0.15} />
